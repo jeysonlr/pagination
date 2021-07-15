@@ -10,3 +10,4 @@
 
 ### 2-b Implementando busca normal no Repositorio
 <img src="./img/ExNormal.PNG">
+
