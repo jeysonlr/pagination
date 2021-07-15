@@ -1,0 +1,23 @@
+{
+    "name": "jeyson/pagination",
+    "description": "Paginacao com ORM",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Pagination\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jeyson Romualdo",
+            "email": "jeysonlr@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "doctrine/orm": ">=2.6"
+    }
+}
