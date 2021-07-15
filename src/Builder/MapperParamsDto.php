@@ -22,7 +22,6 @@ abstract class MapperParamsDto
     {
         try {
             return (new Params())
-//                ->setCriteria($params["queryParams"])
                 ->setPage(intval($params["page"]))
                 ->setPerPage(intval($params["limit"]))
                 ->setHydrateMode($hydrationMode)
