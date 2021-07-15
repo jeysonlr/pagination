@@ -9,4 +9,4 @@
  <img src="./img/ExSql.PNG"><br />
 
 ### 2-b Implementando busca normal no Repositorio
-<img src="./img/Ex Normal.png">
+<img src="./img/ExNormal.png">
