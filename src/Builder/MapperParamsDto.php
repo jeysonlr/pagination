@@ -11,7 +11,8 @@ use Pagination\DTO\Params;
 
 abstract class MapperParamsDto
 {
-    const HYDRATE_OBJECT = Query::HYDRATE_OBJECT;
+    const NUMBER_ONE = 1, NUMBER_TWENTY = 20, HYDRATE_OBJECT = Query::HYDRATE_OBJECT;
+    
     /**
      * @param array $params
      * @param int   $hydrationMode
@@ -21,9 +22,12 @@ abstract class MapperParamsDto
     public static function map(array $params, int $hydrationMode = self::HYDRATE_OBJECT): Params
     {
         try {
+            $page = intval($params["page"]);
+            $limit = intval($params["limit"]);
+
             return (new Params())
-                ->setPage(intval($params["page"]))
-                ->setPerPage(intval($params["limit"]))
+                ->setPage(($page < self::NUMBER_ONE) ? self::NUMBER_ONE : $page)
+                ->setPerPage(($limit < self::NUMBER_ONE) ? self::NUMBER_TWENTY : $limit)
                 ->setHydrateMode($hydrationMode)
                 ->setSearchField($params["searchfield"])
                 ->setSearch($params["search"])
