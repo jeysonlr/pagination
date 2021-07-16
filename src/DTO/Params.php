@@ -8,15 +8,23 @@ use Doctrine\ORM\AbstractQuery;
 
 class Params
 {
+    const NUMBER_ONE = 1, NUMBER_TWENTY = 20, SORT = 'ASC';
+
     /**
      * @var int|null
      */
-    private $page = 1, $perPage = 20, $hydrateMode = AbstractQuery::HYDRATE_OBJECT, $countQtdSql;
+    private $page = self::NUMBER_ONE,
+        $perPage = self::NUMBER_TWENTY,
+        $hydrateMode = AbstractQuery::HYDRATE_OBJECT,
+        $countQtdSql;
 
     /**
      * @var string|null
      */
-    private $sort = 'ASC', $order = '', $search = '', $searchField = '';
+    private $sort = self::SORT,
+        $order = '',
+        $search = '',
+        $searchField = '';
 
     /**
      * @var array|null

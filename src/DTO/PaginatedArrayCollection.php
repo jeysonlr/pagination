@@ -8,6 +8,8 @@ use LogicException;
 
 class PaginatedArrayCollection
 {
+    const NUMBER_ZERO = 0, NUMBER_ONE = 1, NUMBER_TWENTY = 20;
+
     /**
      * @var int|null
      */
@@ -26,7 +28,7 @@ class PaginatedArrayCollection
     public function __construct(
         array $elements = [],
         ?int $currentpage = null,
-        ?int $perpage = 20,
+        ?int $perpage = self::NUMBER_TWENTY,
         ?int $total = null,
         ?array $criteria = [],
         ?array $orderby = []
@@ -84,7 +86,7 @@ class PaginatedArrayCollection
         }
 
         if (!$this->getTotal()) {
-            return 0;
+            return self::NUMBER_ZERO;
         }
         $this->lastpage = ceil($this->getTotal() / $this->getPerPage());
 
@@ -142,7 +144,9 @@ class PaginatedArrayCollection
      */
     public function getNextPageUrl(): ?string
     {
-        $this->nextpageurl = ($this->getCurrentPage() === $this->getLastPage()) ? null : $this->mountUrl($this->getCurrentPage() + 1);
+        $this->nextpageurl = ($this->getTotal() > self::NUMBER_ZERO) ?
+            (($this->getCurrentPage() === $this->getLastPage()) ? null : $this->mountUrl($this->getCurrentPage() + self::NUMBER_ONE))
+            : null;
         return $this->nextpageurl;
     }
 
@@ -161,7 +165,9 @@ class PaginatedArrayCollection
      */
     public function getPrevPageUrl(): ?string
     {
-        $this->prevpageurl = ($this->getCurrentPage() === 1) ? null : $this->mountUrl($this->getCurrentPage() - 1);
+        $this->prevpageurl = ($this->getTotal() > self::NUMBER_ZERO) ?
+            (($this->getCurrentPage() === self::NUMBER_ONE) ? null : $this->mountUrl($this->getCurrentPage() - self::NUMBER_ONE))
+            : null;
         return $this->prevpageurl;
     }
 
@@ -228,8 +234,8 @@ class PaginatedArrayCollection
         $order = '';
         $criteria = '';
 
-        if ($page < 1) {
-            $page = 1;
+        if ($page < self::NUMBER_ONE) {
+            $page = self::NUMBER_ONE;
         }
 
         if ($page > $this->getTotal()) {
@@ -241,7 +247,7 @@ class PaginatedArrayCollection
                 if (!is_array($data)) {
                     $param = sprintf("&%s=%s", $key, $data);
                 } else {
-                    $param = sprintf("&search=%s&searchfield=%s", $data[1] ?? $data, $key);
+                    $param = sprintf("&search=%s&searchfield=%s", $data[self::NUMBER_ONE] ?? $data, $key);
                 }
 
                 $criteria .= $param;
