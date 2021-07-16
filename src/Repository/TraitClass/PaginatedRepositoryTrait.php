@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Pagination\Repository\TraitClass;
 
+use Pagination\DTO\Params;
 use Doctrine\ORM\NativeQuery;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\Query\ResultSetMappingBuilder;
-use Pagination\DTO\Params;
 use Doctrine\ORM\NonUniqueResultException;
 use Pagination\DTO\PaginatedArrayCollection;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 trait PaginatedRepositoryTrait
 {
@@ -49,7 +49,7 @@ trait PaginatedRepositoryTrait
      *
      * @return array
      */
-    public function mountSqlParams(NativeQuery $query, int $page, int $perPage): array
+    public function manageSqlParams(NativeQuery $query, int $page, int $perPage): array
     {
         $query->setSQL($query->getSQL() . ' offset ' . (($page - 1) * $perPage) . ' limit ' . $perPage);
         return $query->getArrayResult();
@@ -116,7 +116,7 @@ trait PaginatedRepositoryTrait
             $qb->addOrder($orderBy, $this->getEntityAlias());
         }
 
-       $this->processCriteria($qb, $criteria);
+        $this->processCriteria($qb, $criteria);
         return $qb;
     }
 

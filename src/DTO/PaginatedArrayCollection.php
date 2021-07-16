@@ -25,9 +25,9 @@ class PaginatedArrayCollection
 
     public function __construct(
         array $elements = [],
-        int $currentpage = null,
-        int $perpage = 10,
-        int $total = null,
+        ?int $currentpage = null,
+        ?int $perpage = 20,
+        ?int $total = null,
         ?array $criteria = [],
         ?array $orderby = []
     ) {
@@ -259,7 +259,7 @@ class PaginatedArrayCollection
     /**
      * @return PaginatedArrayCollection
      */
-    public function resultPagination(): PaginatedArrayCollection
+    public function dataPagination(): PaginatedArrayCollection
     {
         $this->data = null;
         return $this;

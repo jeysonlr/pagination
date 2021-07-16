@@ -10,7 +10,7 @@ class PaginatedQueryBuilder extends QueryBuilder
 {
     /**
      * @param array $orderBy
-     * @param null  $entityAlias
+     * @param null $entityAlias
      * @return PaginatedQueryBuilder
      */
     public function addOrder(array $orderBy, $entityAlias = null): PaginatedQueryBuilder
@@ -22,7 +22,6 @@ class PaginatedQueryBuilder extends QueryBuilder
                 $this->addOrderBy($field, $order);
             }
         }
-
         return $this;
     }
 

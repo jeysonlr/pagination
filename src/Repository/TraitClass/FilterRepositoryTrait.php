@@ -10,7 +10,7 @@ trait FilterRepositoryTrait
 {
     /**
      * @param QueryBuilder $qb
-     * @param array        $criteria
+     * @param array $criteria
      */
     public function buildFilterCriteria(QueryBuilder $qb, array $criteria): void
     {
@@ -21,12 +21,12 @@ trait FilterRepositoryTrait
 
     /**
      * @param QueryBuilder $qb
-     * @param string       $field
-     * @param              $value
+     * @param string $field
+     * @param $value
      */
     protected function filterField(QueryBuilder $qb, string $field, $value): void
     {
-        list ($fieldName, $operatorName) = $this->splitFieldName($field);
+        list($fieldName, $operatorName) = $this->splitFieldName($field);
 
         $fieldParameter = 'f' . substr(md5($field), 0, 5);
 
@@ -65,6 +65,10 @@ trait FilterRepositoryTrait
         $qb->setParameter($fieldParameter, $value);
     }
 
+    /**
+     * @param string $field
+     * @return array
+     */
     private function splitFieldName(string $field): array
     {
         $parts = explode('_', $field);

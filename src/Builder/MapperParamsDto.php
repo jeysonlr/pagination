@@ -12,10 +12,10 @@ use Pagination\DTO\Params;
 abstract class MapperParamsDto
 {
     const NUMBER_ONE = 1, NUMBER_TWENTY = 20, HYDRATE_OBJECT = Query::HYDRATE_OBJECT;
-    
+
     /**
      * @param array $params
-     * @param int   $hydrationMode
+     * @param int $hydrationMode
      * @return Params
      * @throws Exception
      */
